@@ -33,6 +33,8 @@ public class LoginCheckFilter implements Filter {
     public void doFilter(ServletRequest servletrequest, ServletResponse servletresponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletrequest;
         HttpServletResponse response = (HttpServletResponse) servletresponse;
+        long id = Thread.currentThread().getId();
+        log.info("线程id为: {}",id);
         //1 获取本次请求的URI
         String requestURI = request.getRequestURI();
 
