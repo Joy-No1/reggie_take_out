@@ -20,9 +20,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @RequestMapping("/login")
     public R<Employee> login(HttpServletRequest request, @RequestBody Employee employee){
-        log.info("登陆成功");
+        request.getSession().setAttribute("employee",employee);
+        String requestURI = request.getRequestURI();
         return null;
+
     }
 
 }

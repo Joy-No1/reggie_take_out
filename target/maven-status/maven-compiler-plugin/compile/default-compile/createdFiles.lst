@@ -1,7 +1,11 @@
 com/xml/reggie/service/impl/EmployeeServiceImpl.class
 com/xml/reggie/entity/Employee.class
 com/xml/reggie/service/EmployeeService.class
+com/xml/reggie/config/WebMvcConfig.class
+com/xml/reggie/filter/LoginCheckFilter.class
+com/xml/reggie/common/JacksonObjectMapper.class
 com/xml/reggie/ReggieApplication.class
 com/xml/reggie/common/R.class
+com/xml/reggie/common/BaseContext.class
 com/xml/reggie/controller/EmployeeController.class
 com/xml/reggie/mapper/EmployeeMapper.class
