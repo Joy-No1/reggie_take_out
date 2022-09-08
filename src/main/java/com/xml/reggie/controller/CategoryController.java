@@ -38,13 +38,10 @@ public class CategoryController {
      */
     @GetMapping("/page")
     public R<Page> page(int page,int pageSize){
-        Page<Category> pageInfo=new Page<>(page,pageSize);
+        Page pageInfo=new Page<>(page,pageSize);
         LambdaQueryWrapper<Category> queryWrapper=new LambdaQueryWrapper<>();
         queryWrapper.orderByDesc(Category::getSort);
         categoryService.page(pageInfo,queryWrapper);
         return R.success(pageInfo);
     }
-
-
-
 }
