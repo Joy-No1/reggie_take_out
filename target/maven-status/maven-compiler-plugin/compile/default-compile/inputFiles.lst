@@ -5,10 +5,13 @@
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/impl/DishFlavorServiceImpl.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/mapper/DishMapper.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/controller/CommonController.java
+/Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/mapper/SetmealMapper.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/impl/DishServiceImpl.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/config/WebMvcConfig.java
+/Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/impl/SetmealServiceImpl.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/common/BaseContext.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/common/GlobalExceptionHandler.java
+/Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/SetmealService.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/impl/CategoryServiceImpl.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/ReggieApplication.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/mapper/EmployeeMapper.java
@@ -21,6 +24,7 @@
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/DishFlavorService.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/entity/Dish.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/entity/DishFlavor.java
+/Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/entity/Setmeal.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/DishService.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/service/impl/EmployeeServiceImpl.java
 /Users/joy/IdeaProjects/reggie_take_out/src/main/java/com/xml/reggie/filter/LoginCheckFilter.java

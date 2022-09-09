@@ -25,17 +25,21 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
     private DishFlavorService dishFlavorService;
 
 
+    /**
+     * 新增菜品同时保存口味数据
+     * @param dishDto
+     */
     @Transactional
     @Override
     public void saveWithFlavor(DishDto dishDto) {
         //保存菜品的基本信息
         this.save(dishDto);
 
-        Long dishId = dishDto.getId();//菜品id
+//        Long dishId = dishDto.getId();//菜品id
         //菜品口味
         List<DishFlavor> flavors = dishDto.getFlavors();
         flavors = flavors.stream().map((item) -> {
-            item.setDishId(dishId);
+            item.setDishId(dishDto.getId());
             return item;
         }).collect(Collectors.toList());
         //保存菜品口味数据

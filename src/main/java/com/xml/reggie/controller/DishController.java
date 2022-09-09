@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,58 +29,65 @@ public class DishController {
     @Autowired
     private CategoryService categoryService;
 
+
+    /**
+     * 分页
+     *
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/page")
+    public R<Page> page(int page, int pageSize, String name) {
+        log.info("page:{}  pageSize:{}", page, pageSize);
+        Page<Dish> pageInfo = new Page(page, pageSize);
+        Page<DishDto> dishDtoPage = new Page<>();
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(name != null, Dish::getName, name);
+        queryWrapper.orderByDesc(Dish::getUpdateTime);
+        dishService.page(pageInfo);
+        BeanUtils.copyProperties(pageInfo, dishDtoPage, "records");
+        List<Dish> records = pageInfo.getRecords();
+        List<DishDto> list = records.stream().map((item) -> {
+            DishDto dishDto = new DishDto();
+            BeanUtils.copyProperties(item, dishDto);
+            Long categoryId = item.getCategoryId();
+            Category category = categoryService.getById(categoryId);
+            if (category != null) {
+                String categoryName = category.getName();
+                dishDto.setCategoryName(categoryName);
+            }
+            return dishDto;
+        }).collect(Collectors.toList());
+        dishDtoPage.setRecords(list);
+        return R.success(dishDtoPage);
+    }
+
+
     /**
      * 新增菜品
+     *
      * @param dishDto
      * @return
      */
     @PostMapping
     public R<String> save(@RequestBody DishDto dishDto) {
         log.info("dishDto:{}", dishDto);
-        dishService.save(dishDto);
-        return R.success("添加成功");
-    }
-
-
-    /**
-     * 分页
-     * @param dish
-     * @param page
-     * @param pageSize
-     * @return
-     */
-    @GetMapping("/page")
-    public R<Page> page(Dish dish, int page, int pageSize) {
-        log.info("page:{}  pageSize:{} dish:{} ", page, pageSize, dish);
-        Page<Dish> pageInfo = new Page(page, pageSize);
-        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotEmpty(dish.getName()), Dish::getName, dish.getName());
-        queryWrapper.orderByDesc(Dish::getUpdateTime);
-        dishService.page(pageInfo, queryWrapper);
-
-        Page<DishDto> resPage = new Page<>(page, pageSize);
-        BeanUtils.copyProperties(pageInfo, resPage, "records");
-        resPage.setRecords(pageInfo.getRecords().stream().map(item -> {
-            DishDto dishDto = new DishDto();
-            BeanUtils.copyProperties(item, dishDto);
-            Category category = categoryService.getById(item.getCategoryId());
-            if (category != null) {
-                dishDto.setCategoryName(category.getName());
-            }
-            return dishDto;
-        }).collect(Collectors.toList()));
-        return R.success(resPage);
+        dishService.saveWithFlavor(dishDto);
+        return R.success("新增菜品成功");
     }
 
     /**
      * 根据id查询菜品信息和口味信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-    public R<DishDto> get(@PathVariable Long id){
-
-
+    public R<DishDto> get(@PathVariable Long id) {
+        log.info("id:{}", id);
+        return null;
     }
 
 }
