@@ -6,5 +6,5 @@ import com.xml.reggie.entity.DishFlavor;
 
 import java.util.List;
 
-public interface DishFlavorService extends IService<Dish> {
+public interface DishFlavorService extends IService<DishFlavor> {
 }

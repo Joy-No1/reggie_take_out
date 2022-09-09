@@ -28,14 +28,26 @@ public class DishController {
     @Autowired
     private CategoryService categoryService;
 
+    /**
+     * 新增菜品
+     * @param dishDto
+     * @return
+     */
     @PostMapping
-    public R<String> save(@RequestBody DishDto dish) {
-        log.info("dish:{}", dish);
-        dishService.save(dish);
+    public R<String> save(@RequestBody DishDto dishDto) {
+        log.info("dishDto:{}", dishDto);
+        dishService.save(dishDto);
         return R.success("添加成功");
     }
 
 
+    /**
+     * 分页
+     * @param dish
+     * @param page
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/page")
     public R<Page> page(Dish dish, int page, int pageSize) {
         log.info("page:{}  pageSize:{} dish:{} ", page, pageSize, dish);
@@ -59,5 +71,15 @@ public class DishController {
         return R.success(resPage);
     }
 
+    /**
+     * 根据id查询菜品信息和口味信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public R<DishDto> get(@PathVariable Long id){
+
+
+    }
 
 }
