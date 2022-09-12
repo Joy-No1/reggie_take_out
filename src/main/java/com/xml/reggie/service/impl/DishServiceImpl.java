@@ -24,9 +24,12 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
     @Autowired
     private DishFlavorService dishFlavorService;
 
+    @Autowired
+    private DishService dishService;
 
     /**
      * 新增菜品同时保存口味数据
+     *
      * @param dishDto
      */
     @Transactional
@@ -43,6 +46,33 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
             return item;
         }).collect(Collectors.toList());
         //保存菜品口味数据
+        dishFlavorService.saveBatch(flavors);
+    }
+
+    @Override
+    public DishDto getByIdWithFlavor(Long id) {
+        Dish dish = this.getById(id);
+        DishDto dishDto = new DishDto();
+        BeanUtils.copyProperties(dish, dishDto);
+        LambdaQueryWrapper<DishFlavor> queryWrapper = new LambdaQueryWrapper<DishFlavor>();
+        queryWrapper.eq(DishFlavor::getDishId, dish.getId());
+        List<DishFlavor> flavors = dishFlavorService.list(queryWrapper);
+        dishDto.setFlavors(flavors);
+        return dishDto;
+    }
+
+    @Transactional
+    @Override
+    public void updateWithFlavor(DishDto dishDto) {
+        this.updateById(dishDto);
+        LambdaQueryWrapper<DishFlavor> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.eq(DishFlavor::getDishId,dishDto.getId());
+        dishFlavorService.remove(queryWrapper);
+        List<DishFlavor> flavors = dishDto.getFlavors();
+        flavors=flavors.stream().map((item)->{
+            item.setDishId(dishDto.getId());
+            return item;
+        }).collect(Collectors.toList());
         dishFlavorService.saveBatch(flavors);
     }
 
