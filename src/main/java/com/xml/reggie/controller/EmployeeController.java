@@ -4,6 +4,7 @@ package com.xml.reggie.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xml.reggie.common.CustomException;
 import com.xml.reggie.common.R;
 import com.xml.reggie.entity.Employee;
 import com.xml.reggie.service.EmployeeService;
@@ -124,10 +125,15 @@ public class EmployeeController {
     public R<String> update(@RequestBody Employee employee) {
         long id = Thread.currentThread().getId();
         log.info("线程id为: {}",id);
+
+        if (employee.getId()==1){
+            throw new CustomException("不能删除");
+        }
+
        if (employee!=null){
            employeeService.updateById(employee);
        }
-        return R.success("员工信息修改成功");
+        return R.success("修改成功!");
     }
 
 

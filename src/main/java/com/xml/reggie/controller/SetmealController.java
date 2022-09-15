@@ -104,12 +104,12 @@ public class SetmealController {
         log.info("status:{}  ids:{}", status, ids);
         List<Setmeal> setmealList = new ArrayList<>();
         for (Long id : ids) {
-            Setmeal setmeal=new Setmeal();
+            Setmeal setmeal = new Setmeal();
             setmeal.setId(id);
             setmeal.setStatus(status);
             setmealList.add(setmeal);
         }
-       setmealService.updateBatchById(setmealList);
+        setmealService.updateBatchById(setmealList);
         return R.success("修改成功!!");
     }
 }
