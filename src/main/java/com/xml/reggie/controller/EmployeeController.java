@@ -1,7 +1,6 @@
 package com.xml.reggie.controller;
 
 
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xml.reggie.common.CustomException;
@@ -99,6 +98,7 @@ public class EmployeeController {
 
     /**
      * 员工分页查询
+     *
      * @param page
      * @param pageSize
      * @param name
@@ -107,45 +107,47 @@ public class EmployeeController {
     @GetMapping("/page")
     public R<Page> page(@RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "19") int pageSize, String name) {
         Page<Employee> pageInfo = new Page<>(page, pageSize);
-        LambdaQueryWrapper<Employee> queryWrapper=new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotEmpty(name),Employee::getName,name);
+        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotEmpty(name), Employee::getName, name);
         queryWrapper.orderByDesc(Employee::getUpdateTime);
 
-        employeeService.page(pageInfo,queryWrapper);
+        employeeService.page(pageInfo, queryWrapper);
         return R.success(pageInfo);
     }
 
 
     /**
      * 启用禁用
+     *
      * @param employee
      * @return
      */
     @PutMapping
     public R<String> update(@RequestBody Employee employee) {
         long id = Thread.currentThread().getId();
-        log.info("线程id为: {}",id);
+        log.info("线程id为: {}", id);
 
-        if (employee.getId()==1){
+        if (employee.getId() == 1) {
             throw new CustomException("不能删除");
         }
 
-       if (employee!=null){
-           employeeService.updateById(employee);
-       }
+        if (employee != null) {
+            employeeService.updateById(employee);
+        }
         return R.success("修改成功!");
     }
 
 
     /**
      * 根据id查询员工
+     *
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-    public R<Employee> getById(@PathVariable Long id){
+    public R<Employee> getById(@PathVariable Long id) {
         Employee employee = employeeService.getById(id);
-        if (employee!=null){
+        if (employee != null) {
             return R.success(employee);
         }
         return R.error("没有查询到员工信息");
