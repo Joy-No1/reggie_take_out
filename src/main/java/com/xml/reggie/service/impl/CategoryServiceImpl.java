@@ -6,7 +6,7 @@ import com.xml.reggie.common.CustomException;
 import com.xml.reggie.entity.Category;
 import com.xml.reggie.entity.Dish;
 import com.xml.reggie.entity.Setmeal;
-import com.xml.reggie.common.mapper.CategoryMapper;
+import com.xml.reggie.mapper.CategoryMapper;
 import com.xml.reggie.service.CategoryService;
 import com.xml.reggie.service.DishService;
 import com.xml.reggie.service.SetmealService;

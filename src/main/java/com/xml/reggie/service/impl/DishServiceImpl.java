@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xml.reggie.dto.DishDto;
 import com.xml.reggie.entity.Dish;
 import com.xml.reggie.entity.DishFlavor;
-import com.xml.reggie.common.mapper.DishMapper;
+import com.xml.reggie.mapper.DishMapper;
 import com.xml.reggie.service.DishFlavorService;
 import com.xml.reggie.service.DishService;
 import org.springframework.beans.BeanUtils;

@@ -6,7 +6,7 @@ import com.xml.reggie.common.CustomException;
 import com.xml.reggie.dto.SetmealDto;
 import com.xml.reggie.entity.Setmeal;
 import com.xml.reggie.entity.SetmealDish;
-import com.xml.reggie.common.mapper.SetmealMapper;
+import com.xml.reggie.mapper.SetmealMapper;
 import com.xml.reggie.service.SetmealDishService;
 import com.xml.reggie.service.SetmealService;
 import org.springframework.beans.factory.annotation.Autowired;
